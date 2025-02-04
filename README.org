@@ -36,5 +36,5 @@ To upload a file, use the following curl command with the POST method. Note that
 
 
 * TODO things to do: 
-** Delete functionality
-** Get file list
+ * Delete functionality
+ * Get file list

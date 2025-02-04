@@ -1,0 +1,40 @@
+#+TITLE: File Upload and Management Server
+
+This project is a simple server application that allows you to upload, retrieve, and delete files through HTTP requests. The server saves uploaded files in the `/upload` directory and allows file retrieval and deletion using specific endpoints.
+
+* Server Functionality:
+  - **Upload**: Upload a file to the server.
+  - **Retrieve**: Retrieve a file from the server.
+  - **Delete**: Delete a file from the server.
+
+The server operates on the following endpoints:
+- **POST /upload**: Uploads a file to the server.
+- **GET /get/{filename}**: Retrieves a file from the server.
+- **DELETE /delete/{filename}**: Deletes a file from the server.
+
+* Usage Instructions:
+
+To interact with the server, use `curl` commands to upload, retrieve, or delete files. Below are the examples for each operation.
+
+** Download a file from the server:
+
+Use the following `curl` command to retrieve a file from the server:
+
+#+begin_src bash
+  curl -O localhost:3000/get/file.mkv
+#+end_src
+
+** Upload a file on the server:
+To upload a file, use the following curl command with the POST method. Note that the data must be sent as multipart/form-data.
+
+#+begin_src bash
+  curl -X POST localhost:3000/upload \
+    -H "Content-Type: multipart/form-data" \
+    -F "file=@/home/rxen/file.mkv"
+#+end_src
+
+
+
+* TODO things to do: 
+** Delete functionality
+** Get file list

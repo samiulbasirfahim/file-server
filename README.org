@@ -3,14 +3,16 @@
 This project is a simple server application that allows you to upload, retrieve, and delete files through HTTP requests. The server saves uploaded files in the `/upload` directory and allows file retrieval and deletion using specific endpoints.
 
 * Server Functionality:
-  - **Upload**: Upload a file to the server.
-  - **Retrieve**: Retrieve a file from the server.
-  - **Delete**: Delete a file from the server.
+  - *Upload*: Upload a file to the server.
+  - *Retrieve*: Retrieve a file from the server.
+  - *Delete*: Delete a file from the server.
 
 The server operates on the following endpoints:
-- **POST /upload**: Uploads a file to the server.
-- **GET /get/{filename}**: Retrieves a file from the server.
-- **DELETE /delete/{filename}**: Deletes a file from the server.
+- *POST /upload/*: Uploads a file to the server.
+- *POST /upload/{directory}*: Uploads a file to a subdirectory of the server.
+- *GET /get/{filename}*: Retrieves a file from the server.
+- *GET /get/{directory}/{filename}*: Retrieves a file from a subdirectory from the server.
+- *DELETE /delete/{filename}*: Deletes a file from the server.
 
 * Usage Instructions:
 
@@ -37,4 +39,5 @@ To upload a file, use the following curl command with the POST method. Note that
 
 * TODO things to do: 
  * Delete functionality
- * Get file list
+ * Get file list 
+

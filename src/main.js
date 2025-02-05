@@ -1,7 +1,7 @@
 import http from "node:http";
-import { createReadStream, existsSync, mkdirSync } from "node:fs";
+import { createReadStream, existsSync, mkdirSync, truncate } from "node:fs";
 import url from "node:url";
-import path from "node:path";
+import path, { parse } from "node:path";
 import multer from "multer";
 
 const uploadDir = path.join(process.cwd(), "upload");
@@ -13,8 +13,17 @@ if (!existsSync(uploadDir)) {
 }
 
 const storage = multer.diskStorage({
-    destination: (_, __, cb) => {
-        cb(null, uploadDir);
+    destination: (req, __, cb) => {
+        const filedir = path.join(
+            uploadDir,
+            url.parse(req.url).pathname.split("/upload")[1],
+        );
+        if (!existsSync(filedir)) {
+            mkdirSync(filedir, {
+                recursive: true,
+            });
+        }
+        cb(null, filedir);
     },
 
     filename: (_, file, cb) => {
@@ -27,7 +36,9 @@ const upload = multer({ storage }).single("file");
 const server = http.createServer((req, res) => {
     const parsedUrl = url.parse(req.url);
 
-    if (parsedUrl.pathname == "/upload") {
+    if (parsedUrl.pathname.startsWith("/upload")) {
+        console.log();
+
         upload(req, res, (err) => {
             if (err) {
                 res.writeHead(500, { "Content-Type": "application/json" });
